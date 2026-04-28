@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuha Alsufyani — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0D0D0F;
+    --bg2: #141417;
+    --bg3: #1C1C22;
+    --border: rgba(255,255,255,0.07);
+    --text: #F0EEF8;
+    --muted: #8A87A0;
+    --accent: #7B6EF6;
+    --accent2: #A78BFA;
+    --teal: #2DD4BF;
+    --green: #4ADE80;
+    --card-bg: rgba(255,255,255,0.03);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.5;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(13,13,15,0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,110,246,0.15) 0%, transparent 70%);
+    top: 10%; left: -10%;
+    pointer-events: none;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(45,212,191,0.08) 0%, transparent 70%);
+    bottom: 10%; right: 5%;
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(123,110,246,0.1);
+    border: 1px solid rgba(123,110,246,0.25);
+    color: var(--accent2);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    width: fit-content;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--teal) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent2);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(123,110,246,0.35);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+
+  /* ── STATS ── */
+  .stats {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .stat-item {}
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--text), var(--muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-label { font-size: 0.8rem; color: var(--muted); font-weight: 400; margin-top: 2px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 3rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 3rem;
+    line-height: 1.1;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .project-card:hover {
+    border-color: rgba(123,110,246,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .project-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    background: var(--bg3);
+  }
+
+  .project-img-placeholder {
+    width: 100%;
+    height: 220px;
+    background: linear-gradient(135deg, var(--bg3), var(--bg2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-img-placeholder::after {
+    content: 'Add Screenshot';
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    background: rgba(0,0,0,0.4);
+    padding: 4px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .project-body { padding: 1.5rem; }
+
+  .project-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: 100px;
+    text-transform: uppercase;
+  }
+
+  .tag-purple { background: rgba(123,110,246,0.15); color: var(--accent2); }
+  .tag-teal { background: rgba(45,212,191,0.12); color: var(--teal); }
+  .tag-green { background: rgba(74,222,128,0.12); color: var(--green); }
+  .tag-orange { background: rgba(251,146,60,0.12); color: #fb923c; }
+
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .project-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .project-role {
+    font-size: 0.8rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .project-role strong { color: var(--text); }
+
+  .award-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(251,191,36,0.1);
+    border: 1px solid rgba(251,191,36,0.2);
+    color: #fbbf24;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-left: auto;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .skill-card:hover { border-color: rgba(123,110,246,0.25); }
+
+  .skill-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+
+  .skill-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-list {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* ── CERTS ── */
+  .certs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .cert-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    transition: border-color 0.2s;
+  }
+
+  .cert-item:hover { border-color: rgba(45,212,191,0.25); }
+
+  .cert-logo {
+    width: 36px; height: 36px;
+    background: rgba(45,212,191,0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .cert-info { flex: 1; }
+  .cert-name { font-size: 0.9rem; font-weight: 500; }
+  .cert-issuer { font-size: 0.78rem; color: var(--muted); }
+  .cert-date { font-size: 0.75rem; color: var(--muted); }
+
+  /* ── EXPERIENCE ── */
+  .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-date { font-size: 0.78rem; color: var(--muted); padding-top: 4px; }
+
+  .exp-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .exp-company { font-size: 0.85rem; color: var(--accent2); margin-bottom: 0.5rem; }
+
+  .exp-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-radius: 24px 24px 0 0;
+    text-align: center;
+    padding: 6rem 3rem;
+  }
+
+  .contact-email {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.03em;
+    transition: color 0.2s;
+  }
+
+  .contact-email:hover { color: var(--accent2); }
+
+  .contact-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 4px; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 3rem;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .divider { margin: 0 1.5rem; }
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .modal {
+    background: #141417;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    max-width: 760px;
+    width: 100%;
+    max-height: 88vh;
+    overflow-y: auto;
+    transform: translateY(24px) scale(0.97);
+    transition: transform 0.3s;
+    scrollbar-width: thin;
+    scrollbar-color: #2a2a32 transparent;
+  }
+  .modal-overlay.active .modal {
+    transform: translateY(0) scale(1);
+  }
+  .modal-cover {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 20px 20px 0 0;
+    display: block;
+  }
+  .modal-cover-placeholder {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #1C1C22, #141417);
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+  }
+  .modal-body { padding: 2rem; }
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+  }
+  .modal-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+  .modal-close {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    border: none;
+    color: var(--muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.12); color: var(--text); }
+  .modal-section { margin-bottom: 1.5rem; }
+  .modal-section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .modal-section p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+  .modal-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .modal-tech span {
+    background: rgba(123,110,246,0.12);
+    color: var(--accent2);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+  .modal-imgs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+    margin-top: 0.75rem;
+  }
+  .modal-img-slot {
+    aspect-ratio: 16/10;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    cursor: zoom-in;
+    position: relative;
+  }
+  .modal-img-slot img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  .modal-img-slot:hover img { transform: scale(1.05); }
+  .modal-img-slot.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: default;
+    border-style: dashed;
+  }
+  .modal-img-slot.empty span { font-size: 0.72rem; color: var(--muted); }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .lightbox.active { opacity: 1; pointer-events: all; }
+  .lightbox img {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+    transform: scale(0.95);
+    transition: transform 0.25s;
+  }
+  .lightbox.active img { transform: scale(1); }
+  .lightbox-close {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* make cards clickable */
+  .project-card { cursor: pointer; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Nuha Alsufyani</a>
+  <div style="display:flex;align-items:center;gap:1.5rem;">
+    <ul class="nav-links">
+      <li><a href="#projects" data-en="Work" data-ar="أعمالي">Work</a></li>
+      <li><a href="#skills" data-en="Skills" data-ar="مهاراتي">Skills</a></li>
+      <li><a href="#experience" data-en="Experience" data-ar="خبراتي">Experience</a></li>
+      <li><a href="#awards" data-en="Awards" data-ar="جوائزي">Awards</a></li>
+      <li><a href="#contact" data-en="Contact" data-ar="تواصلي">Contact</a></li>
+    </ul>
+    <!--<button id="lang-toggle" onclick="toggleLang()" style="background:rgba(123,110,246,0.15);border:1px solid rgba(123,110,246,0.3);color:var(--accent2);font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:100px;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em;">AR</button>-->
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <div class="hero-tag">Open to opportunities</div>
+
+  <h1>Product<br>Designer &<br><span>Problem Solver</span></h1>
+
+  <p class="hero-sub">
+    IT graduate who bridges technical depth and human understanding —
+    building digital products that solve real problems from the inside out.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#projects" class="btn-primary">View My Work</a>
+    <a href="mailto:nuhaalsufyani@gmail.com" class="btn-ghost">Get in Touch</a>
+  </div>
+
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">Projects Shipped</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4+</div>
+      <div class="stat-label">Awards Won</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Microsoft Certifications</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Years of Experience</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Selected Work</div>
+  <h2 class="section-title">Projects that<br>solve real problems</h2>
+
+  <div class="projects-grid">
+
+    <!-- Lasen -->
+    <div class="project-card" onclick="openModal('lasen')">
+      <img src="lasen-cover.png" alt="Lasen" class="project-img" style="object-fit:cover;">
+      <div class="project-img-placeholder" style="display:none">🎙️</div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="tag tag-purple">Azure AI</span>
+          <span class="tag tag-orange">VR</span>
+          <span class="tag tag-teal">Speech-to-Text</span>
+        </div>
+        <div class="project-title">Lasen</div>
+        <p class="project-desc">AI-based fluency training system using Azure Speech Services and VR technology — helping users improve their speaking confidence.</p>
+        <div class="project-role">
+          <span>My Role:</span>
+          <strong>AI Development · Azure Speech Integration · UX</strong>
+          <span class="award-badge">🏆 1st Place — Graduation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bayan -->
+    <div class="project-card" onclick="openModal('bayan')">
+      <!-- 🖼️ BAYAN CARD IMAGE — replace placeholder with: <img src="bayan.png" class="project-img"> -->
+      <img src="bayan-cover.jpg" class="project-img" style="object-fit:contain;background:#fff;padding:1rem;">
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="tag tag-purple">AI</span>
+          <span class="tag tag-teal">Full Stack</span>
+          <span class="tag tag-teal">UI/UX Design</span>
+          <span class="tag tag-teal">Product Ideation & Strategy</span>
+          <span class="tag tag-teal">Design Thinking</span>
+          <span class="award-badge">🏆 2st Place — Pharmathon</span>
+        </div>
+        <div class="project-title">Bayan</div>
+        <p class="project-desc">Full-stack medical system featuring inclusive visual and multilingual AI translation — making healthcare accessible to all patients.</p>
+        <div class="project-role">
+          <span>My Role:</span>
+          <strong>Full Stack Development · AI Integration · Idea Development</strong>
+        </div>
+        <a href="https://github.com/MNEh2/BayanPha" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:0.75rem;font-size:0.8rem;color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:5px 12px;border-radius:100px;transition:all 0.2s;" onmouseover="this.style.color='var(--text)';this.style.borderColor='rgba(255,255,255,0.15)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- FaMeet -->
+    <div class="project-card" onclick="openModal('fameet')">
+      <!-- 🖼️ FAMEET CARD IMAGE — replace fameet-logo.png with your image filename -->
+      <img src="fameet-logo.png" alt="FaMeet" class="project-img" style="object-fit:contain;background:#f0f9ff;padding:1rem;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+      <div class="project-img-placeholder" style="display:none">🌱</div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="tag tag-green">UX Design</span>
+          <span class="tag tag-teal">Full Stack</span>
+          <span class="award-badge">🏆 2nd Place — Monsha'at</span>
+        </div>
+        <div class="project-title">FaMeet</div>
+        <p class="project-desc">Smart platform connecting factories, restaurants, and charities for surplus food redistribution — reducing waste while supporting communities.</p>
+        <div class="project-role">
+          <span>My Role:</span>
+          <strong>UX Design · Product Strategy · Idea Development</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filming -->
+<div class="project-card" onclick="openModal('filming')">
+        <!-- 🖼️ FILMING CARD IMAGE — replace cpoint-ui.png with your image filename -->
+      <img src="filming-cover.jpg" alt="Filming UI" class="project-img" style="height:280px;" onerror="this.style.display='none'">
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="tag tag-purple">UX Design</span>
+          <span class="tag tag-orange">Analytics</span>
+         <!-- <span class="award-badge">🏅 Top 10 — Filmathon</span>-->
+        </div>
+        <div class="project-title">Filming</div>
+        <p class="project-desc">Digital analytics platform supporting the Saudi film industry — enabling data-driven feedback and content improvement for filmmakers and critics alike.</p>
+        <div class="project-role" style="margin-top:1rem;">
+          <span>My Role:</span>
+          <strong>UX Design · UI Design · Analytics Strategy</strong>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Capabilities</div>
+  <h2 class="section-title">What I bring<br>to the table</h2>
+
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">💻</div>
+      <h3>Programming</h3>
+      <div class="skill-list">Python · Java · C++ · JavaScript</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <h3>Web Development</h3>
+      <div class="skill-list">HTML · CSS · React</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🗄️</div>
+      <h3>Databases</h3>
+      <div class="skill-list">MySQL · PostgreSQL</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">☁️</div>
+      <h3>Cloud Computing</h3>
+      <div class="skill-list">Microsoft Azure · Azure AI · OCI</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🖥️</div>
+      <h3>Systems & Infrastructure</h3>
+      <div class="skill-list">Virtualization Technologies · Networking Fundamentals · System Configuration · Access Control Management</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🎨</div>
+      <h3>UI/UX Design</h3>
+      <div class="skill-list">Figma · Wireframing · Prototyping · User Research · Design Systems · Accessibility</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">⚙️</div>
+      <h3>Dev Tools</h3>
+      <div class="skill-list">Git · API Integration · Technical Documentation · Problem Diagnosis</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🧠</div>
+      <h3>Soft Skills</h3>
+      <div class="skill-list">Analytical Thinking · Problem Solving · Creative Thinking · Leadership · Team Collaboration · Adaptability · Continuous Learning</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Experience</div>
+  <h2 class="section-title">Where I've<br>been building</h2>
+
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-date">Aug 2023 – Aug 2025</div>
+      <div>
+        <div class="exp-title">Tech Track Member <span style="font-size:0.75rem; color:var(--accent2); font-weight:400;">· Deputy Track Lead</span></div>
+        <div class="exp-company">Dour AlRyadah Incubators & Accelerators</div>
+        <ul class="exp-desc" style="padding-left:1rem; margin-top:0.5rem;">
+          <li>Led technology-driven initiatives aligning digital solutions with organizational vision and innovation objectives.</li>
+          <li>Developed and supported technical content and platforms, enhancing operational efficiency and digital engagement.</li>
+          <li>Coordinated cross-functional teams to deliver scalable solutions, improving performance and system usability.</li>
+          <li>Applied project management and technical problem-solving skills to optimize workflows and team productivity.</li>
+          <li>Acted as Deputy Track Lead supporting content strategy, digital platforms, and innovation initiatives.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Jun 2024 – Aug 2024</div>
+      <div>
+        <div class="exp-title">Cooperative Trainee — IT & Communications</div>
+        <div class="exp-company">Al Hada Armed Forces Hospital</div>
+        <ul class="exp-desc" style="padding-left:1rem; margin-top:0.5rem;">
+          <li>Designed an IT-based solution to reduce patient appointment no-show rates through process automation.</li>
+          <li>Configured systems, managed access controls, and secured departmental devices and infrastructure.</li>
+          <li>Built and maintained databases, ensuring data accuracy, integrity, and efficient information retrieval.</li>
+          <li>Implemented networking and virtual systems connecting multiple branches and supporting operational continuity.</li>
+          <li>Conducted technical troubleshooting and system maintenance to ensure uninterrupted healthcare IT services.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Volunteer</div>
+      <div>
+        <div class="exp-title">Advisor — IEEE Club</div>
+        <div class="exp-company">Taif University</div>
+        <p class="exp-desc">Provided technical guidance and supported student-led initiatives in technology and innovation.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Volunteer</div>
+      <div>
+        <div class="exp-title">Head of Graphic Design</div>
+        <div class="exp-company">Google Developer Student Club</div>
+        <p class="exp-desc">Led all creative and technical design initiatives for the club's events, content, and visual identity.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Volunteer</div>
+      <div>
+        <div class="exp-title">Technical Content Writer</div>
+        <div class="exp-company">Hasoobiyat Team</div>
+        <p class="exp-desc">Produced simplified technical content for knowledge sharing, making complex topics accessible to wider audiences.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-label">Recognition</div>
+  <h2 class="section-title">Awards &<br>Achievements</h2>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 4rem;">
+
+    <div class="skill-card" style="border-color: rgba(251,191,36,0.2); background: rgba(251,191,36,0.03);">
+      <div style="font-size:1.5rem; margin-bottom:0.75rem;">🥇</div>
+      <h3 style="color:#fbbf24;">1st Place</h3>
+      <p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;">Graduation Project · Taif University · 2025</p>
+    </div>
+
+    <div class="skill-card" style="border-color: rgba(251,191,36,0.2); background: rgba(251,191,36,0.03);">
+      <div style="font-size:1.5rem; margin-bottom:0.75rem;">🥈</div>
+      <h3 style="color:#fbbf24;">2nd Place</h3>
+      <p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;">Capsule Hackathon · Pharmathon Conference · 2026</p>
+    </div>
+
+    <div class="skill-card" style="border-color: rgba(251,191,36,0.2); background: rgba(251,191,36,0.03);">
+      <div style="font-size:1.5rem; margin-bottom:0.75rem;">🥈</div>
+      <h3 style="color:#fbbf24;">2nd Place</h3>
+      <p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;">Monsha'at Bootcamp (FaMeet) · 2024</p>
+    </div>
+
+    <div class="skill-card" style="border-color: rgba(251,191,36,0.2); background: rgba(251,191,36,0.03);">
+      <div style="font-size:1.5rem; margin-bottom:0.75rem;">🏅</div>
+      <h3 style="color:#fbbf24;">Top 10 Projects</h3>
+      <p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;">Filmathon · Saudi Film Commission · 2023</p>
+    </div>
+
+    <div class="skill-card" style="border-color: rgba(251,191,36,0.2); background: rgba(251,191,36,0.03);">
+      <div style="font-size:1.5rem; margin-bottom:0.75rem;">🥈</div>
+      <h3 style="color:#fbbf24;">2nd Place</h3>
+      <p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;">Entrepreneurial Applications Bootcamp (Seniora) · 2022</p>
+    </div>
+
+    <div class="skill-card" style="border-color: rgba(251,191,36,0.2); background: rgba(251,191,36,0.03);">
+      <div style="font-size:1.5rem; margin-bottom:0.75rem;">🥉</div>
+      <h3 style="color:#fbbf24;">3rd Place</h3>
+      <p style="font-size:0.85rem; color:var(--muted); margin-top:0.4rem;">Scientific Research Competition · Taif Governorate · 2019</p>
+    </div>
+
+  </div>
+
+  <!-- PHOTO GALLERY -->
+  <!-- <div class="section-label" style="margin-bottom:1rem;">Moments</div> -->
+  <!-- <p style="color:var(--muted); font-size:0.875rem; margin-bottom:1.5rem;">Add your photos from hackathons, events, and achievements below.</p> -->
+
+  <!--<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem;">-->
+
+    <!-- Photo Slot 1 — Replace src with your image -->
+   <!--  <div style="border-radius:12px; overflow:hidden; border:1px solid var(--border); aspect-ratio:4/3; background:var(--bg3); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; color:var(--muted); font-size:0.8rem; position:relative;">-->
+      <!-- <img src="YOUR_PHOTO_1.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+      <!-- <span style="font-size:2rem;">📸</span>-->
+     <!--  <span>Photo 1 — e.g. Hackathon</span>-->
+    <!-- </div>-->
+
+    <!-- Photo Slot 2 -->
+    <!-- <div style="border-radius:12px; overflow:hidden; border:1px solid var(--border); aspect-ratio:4/3; background:var(--bg3); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; color:var(--muted); font-size:0.8rem;">-->
+      <!-- <img src="YOUR_PHOTO_2.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+      <!-- <span style="font-size:2rem;">📸</span>-->
+      <!-- <span>Photo 2 — e.g. Award ceremony</span>-->
+    <!-- </div>-->
+
+    <!-- Photo Slot 3 -->
+    <!-- <div style="border-radius:12px; overflow:hidden; border:1px solid var(--border); aspect-ratio:4/3; background:var(--bg3); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; color:var(--muted); font-size:0.8rem;">-->
+      <!-- <img src="YOUR_PHOTO_3.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+     <!--  <span style="font-size:2rem;">📸</span>-->
+      <!-- <span>Photo 3 — e.g. Team project</span>-->
+    <!-- </div>-->
+
+    <!-- Photo Slot 4 -->
+    <!-- <div style="border-radius:12px; overflow:hidden; border:1px solid var(--border); aspect-ratio:4/3; background:var(--bg3); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; color:var(--muted); font-size:0.8rem;">-->
+      <!-- <img src="YOUR_PHOTO_4.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+     <!--  <span style="font-size:2rem;">📸</span>-->
+      <!-- <span>Photo 4 — e.g. Volunteer work</span>-->
+    <!-- </div>-->
+
+  <!--</div>-->
+</section>
+
+<div class="divider"></div>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="section-label">Certifications</div>
+  <h2 class="section-title">Verified expertise</h2>
+
+  <div class="certs-list">
+    <div class="cert-item">
+      <div class="cert-logo">☁️</div>
+      <div class="cert-info">
+        <div class="cert-name">Developing Generative AI Solutions with Azure OpenAI Service</div>
+        <div class="cert-issuer">Microsoft</div>
+      </div>
+      <div class="cert-date">Nov 2024</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-logo">🤖</div>
+      <div class="cert-info">
+        <div class="cert-name">Designing and Implementing Microsoft Azure AI Solutions</div>
+        <div class="cert-issuer">Microsoft</div>
+      </div>
+      <div class="cert-date">Oct 2024</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-logo">⚡</div>
+      <div class="cert-info">
+        <div class="cert-name">Microsoft Azure AI Fundamentals</div>
+        <div class="cert-issuer">Microsoft</div>
+      </div>
+      <div class="cert-date">Oct 2024</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MODALS ══ -->
+
+<!-- Lasen Modal -->
+<div class="modal-overlay" id="modal-lasen" onclick="if(event.target===this)closeModal('lasen')">
+  <div class="modal">
+    <img src="lasen-cover.png" class="modal-cover" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-header">
+        <div class="modal-title">Lasen — لسن</div>
+        <button class="modal-close" onclick="closeModal('lasen')">✕</button>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">About the Project</div>
+        <p>Smart platform for training people with stuttering to improve speech fluency using Virtual Reality and AI. The system provides a realistic VR simulation environment for speech practice, with real-time voice performance analysis using advanced cloud services to deliver precise feedback.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">My Role</div>
+        <p>Led the AI and speech processing technical side within the team, including: building the Speech-to-Text system, programming algorithms to detect linguistic errors and stuttering patterns automatically, and developing Level Progression logic based on pronunciation accuracy and voice output quality.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Technologies Used</div>
+        <div class="modal-tech">
+          <span>Azure Cognitive Services (Speech SDK)</span>
+          <span>Speech-to-Text</span>
+          <span>Text-to-Speech</span>
+          <span>Arabic Reshaper & Bidi</span>
+          <span>Difflib</span>
+          <span>Regex</span>
+          <span>Python</span>
+          <span>VR</span>
+          <span>Time Library</span>
+          <span>String Library</span>
+        </div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Project Screenshots</div>
+        <div class="modal-imgs">
+          <div class="modal-img-slot"><img src="lasen-1.png" onclick="openLightbox(this.src)"></div>
+          <div class="modal-img-slot"><img src="lasen-2.png" onclick="openLightbox(this.src)"></div>
+          <div class="modal-img-slot"><img src="lasen-3.png" onclick="openLightbox(this.src)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bayan Modal -->
+<div class="modal-overlay" id="modal-bayan" onclick="if(event.target===this)closeModal('bayan')">
+  <div class="modal">
+    <img src="bayan-cover.jpg" class="modal-cover" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-header">
+        <div class="modal-title">Bayan — بيان</div>
+        <button class="modal-close" onclick="closeModal('bayan')">✕</button>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">About the Project</div>
+        <p>A smart tool to enhance global health communication and achieve inclusivity in medical care. Bayan serves as an intelligent bridge between health systems and patients — leveraging AI to simplify and adapt medical instructions to be universally understood.</p>
+        <p style="margin-top:0.75rem; font-size:0.8rem; background:rgba(123,110,246,0.08); border:1px solid rgba(123,110,246,0.2); border-radius:8px; padding:0.6rem 0.9rem; color:var(--accent2);">🔬 Currently under R&D — refining core algorithms and testing response models before final launch.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">My Role</div>
+        <p>Contributed to full-stack development and AI integration, focusing on building the core logic for multilingual medical translation, visual instruction generation, and accessibility-first design.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Technologies Used</div>
+        <div class="modal-tech">
+          <span>Azure AI</span>
+          <span>Python</span>
+          <span>React</span>
+          <span>Full Stack</span>
+          <span>Multilingual NLP</span>
+          <span>Visual AI</span>
+        </div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Project Screenshots</div>
+        <div class="modal-imgs">
+          <!-- اضيفي صور bayan هنا -->
+          <div class="modal-img-slot"><img src="bayan-1.jpg" onclick="openLightbox(this.src)"></div>
+          <div class="modal-img-slot"><img src="bayan-2.jpg" onclick="openLightbox(this.src)"></div>
+          <div class="modal-img-slot"><img src="bayan-3.jpg" onclick="openLightbox(this.src)"></div>
+        </div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">GitHub</div>
+        <a href="https://github.com/MNEh2/BayanPha" target="_blank" style="color:var(--accent2);font-size:0.9rem;">github.com/MNEh2/BayanPha →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FaMeet Modal -->
+<div class="modal-overlay" id="modal-fameet" onclick="if(event.target===this)closeModal('fameet')">
+  <div class="modal">
+    <img src="fameet-logo.png" class="modal-cover" style="object-fit:contain;background:#f0f9ff;padding:2rem" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-header">
+        <div class="modal-title">FaMeet — فاميت</div>
+        <button class="modal-close" onclick="closeModal('fameet')">✕</button>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">About the Project</div>
+        <p>An integrated digital platform to enable the circular economy and improve food supply chains in Saudi Arabia. FaMeet creates a smart connection channel between factories and restaurants — reducing food waste and supporting economic growth.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">My Role</div>
+        <p>Led product concept development and the technical vision, including: Gap Analysis to identify weaknesses in current supply chains, strategic UX design, and smart solution engineering by integrating AI chatbots and advanced dashboards.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Technologies Used</div>
+        <div class="modal-tech">
+          <span>Python</span>
+          <span>React Native</span>
+          <span>AI Chatbot</span>
+          <span>Business Intelligence</span>
+          <span>KPI Dashboards</span>
+          <span>UX Design</span>
+          <span>Figma</span>
+        </div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Project Screenshots</div>
+        <div class="modal-imgs">
+          <!-- اضيفي صور fameet هنا -->
+          <div class="modal-img-slot"><img src="fameet1.png" onclick="openLightbox(this.src)"></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filming Modal -->
+<div class="modal-overlay" id="modal-filming" onclick="if(event.target===this)closeModal('filming')">
+  <div class="modal">
+    <img src="filming-cover.png" class="modal-cover" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-header">
+        <div class="modal-title">Filmng | فيلمنق 🎬🎮</div>
+        <button class="modal-close" onclick="closeModal('filming')">✕</button>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">About the Project</div>
+        <p style="font-style:italic; color:var(--accent2); margin-bottom:0.75rem; font-size:0.9rem;">"A Digital Studio Pioneering Film Marketing through Playvertising"</p>
+        <p>Filmng is an innovative digital studio aimed at revolutionizing film marketing within the region. Built on the strategy of Playvertising — where interactive games inspired by film narratives are developed to strengthen the audience's emotional connection and boost viral reach.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">My Role — UI/UX Design</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="background:rgba(123,110,246,0.06);border:1px solid rgba(123,110,246,0.15);border-radius:8px;padding:0.75rem;">
+            <p style="font-size:0.8rem;font-weight:600;color:var(--accent2);margin-bottom:3px;">UI Design</p>
+            <p style="font-size:0.85rem;color:var(--muted);">Creating a visual language that merges the magic of cinema with the dynamic energy of the gaming world.</p>
+          </div>
+          <div style="background:rgba(123,110,246,0.06);border:1px solid rgba(123,110,246,0.15);border-radius:8px;padding:0.75rem;">
+            <p style="font-size:0.8rem;font-weight:600;color:var(--accent2);margin-bottom:3px;">UX Strategy</p>
+            <p style="font-size:0.85rem;color:var(--muted);">Designing the user journey to ensure seamless access to interactive games and a clear understanding of the project's core concept.</p>
+          </div>
+          <div style="background:rgba(123,110,246,0.06);border:1px solid rgba(123,110,246,0.15);border-radius:8px;padding:0.75rem;">
+            <p style="font-size:0.8rem;font-weight:600;color:var(--accent2);margin-bottom:3px;">Interactive Content Architecture</p>
+            <p style="font-size:0.85rem;color:var(--muted);">Designing the layout and presentation of games within the platform for a fully immersive user experience.</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Design Philosophy</div>
+        <p>Inspired by gaming culture aesthetics — dark, cinematic palette to reduce eye strain and enhance immersion. Bold contrast and refined typography with a strong visual hierarchy.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Technologies Used</div>
+        <div class="modal-tech">
+          <span>Figma</span>
+          <span>UX Research</span>
+          <span>Visual Hierarchy</span>
+          <span>Interactive Prototyping</span>
+          <span>UI Design</span>
+        </div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">UI Walkthrough</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.75rem;">Homepage → Interactive Game Galleries → Marketing Data & Results</p>
+        <video controls style="width:100%;border-radius:10px;border:1px solid var(--border);background:#000;">
+          <source src="cpoint-video.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Project Screenshots</div>
+        <div class="modal-imgs">
+          <!-- اضيفي صور filming هنا -->
+          <div class="modal-img-slot"><img src="Filming-1.jpg" onclick="openLightbox(this.src)"></div>
+          <div class="modal-img-slot"><img src="Filming-2.jpg" onclick="openLightbox(this.src)"></div>
+          <div class="modal-img-slot"><img src="Filming-3.jpg" onclick="openLightbox(this.src)"></div>
+          <div class="modal-img-slot"><img src="Filming-4.jpg" onclick="openLightbox(this.src)"></div>
+          <div class="modal-img-slot"><img src="Filming-5.jpg" onclick="openLightbox(this.src)"></div>
+          <div class="modal-img-slot"><img src="Filming-6.jpg" onclick="openLightbox(this.src)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  // ── MODAL OPEN/CLOSE ──
+  function openModal(id) {
+    document.getElementById('modal-' + id).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById('modal-' + id).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
+      closeLightbox();
+      document.body.style.overflow = '';
+    }
+  });
+
+  // ── LIGHTBOX ──
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('active');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+</script>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="section-label" style="display:inline-block; margin-bottom:1rem;">Let's connect</div>
+  <h2 class="section-title" style="margin-bottom:1rem;">Ready to build<br>something great?</h2>
+  <p style="color: var(--muted); margin-bottom: 2rem; font-size: 0.95rem;">I'm actively looking for my first full-time role in Product Design or AI solutions.</p>
+  <a href="mailto:nuhaalsufyani@gmail.com" class="contact-email">nuhaalsufyani@gmail.com</a>
+  <div class="contact-links">
+    <a href="https://linkedin.com/in/nuhaalsufyani" class="btn-ghost" target="_blank">LinkedIn →</a>
+    <a href="tel:+966500781805" class="btn-ghost">(+966) 50 078 1805</a>
+  </div>
+  <p style="color: var(--muted); font-size: 0.75rem; margin-top: 4rem;">© 2025 Nuha Alsufyani · Designed with intention</p>
+</div>
+
+
+<script>
+// ── LANGUAGE TOGGLE ──
+const translations = {
+  en: {
+    heroTag: 'Open to opportunities',
+    heroTitle: 'Product<br>Designer &<br><span>Problem Solver</span>',
+    heroSub: 'IT graduate who bridges technical depth and human understanding — building digital products that solve real problems from the inside out.',
+    heroCTA1: 'View My Work',
+    heroCTA2: 'Get in Touch',
+    stat1: 'Projects Shipped',
+    stat2: 'Awards Won',
+    stat3: 'Microsoft Certifications',
+    stat4: 'Years of Experience',
+    workLabel: 'Selected Work',
+    workTitle: 'Projects that<br>solve real problems',
+    skillsLabel: 'Capabilities',
+    skillsTitle: 'What I bring<br>to the table',
+    expLabel: 'Experience',
+    expTitle: "Where I've<br>been building",
+    awardsLabel: 'Recognition',
+    awardsTitle: 'Awards &<br>Achievements',
+    momentsLabel: 'Moments',
+    certLabel: 'Certifications',
+    certTitle: 'Verified expertise',
+    contactLabel: "Let's connect",
+    contactTitle: 'Ready to build<br>something great?',
+    contactSub: "I'm actively looking for my first full-time role in Product Design or AI solutions.",
+    dir: 'ltr'
+  },
+  ar: {
+    heroTag: 'متاحة للفرص الوظيفية',
+    heroTitle: 'مصممة منتجات<br>& <span>حلّالة مشاكل</span>',
+    heroSub: 'خريجة تقنية معلومات تجمع بين العمق التقني وفهم سلوك المستخدم — تبني منتجات رقمية تحل مشاكل حقيقية من الداخل للخارج.',
+    heroCTA1: 'أعمالي',
+    heroCTA2: 'تواصلي معي',
+    stat1: 'مشروع منجز',
+    stat2: 'جائزة',
+    stat3: 'شهادة مايكروسوفت',
+    stat4: 'سنوات خبرة',
+    workLabel: 'أعمال مختارة',
+    workTitle: 'مشاريع تحل<br>مشاكل حقيقية',
+    skillsLabel: 'قدراتي',
+    skillsTitle: 'ما أقدمه<br>للفريق',
+    expLabel: 'الخبرات',
+    expTitle: 'أين<br>بنيت خبرتي',
+    awardsLabel: 'التقدير',
+    awardsTitle: 'الجوائز &<br>الإنجازات',
+    momentsLabel: 'لحظات',
+    certLabel: 'الشهادات',
+    certTitle: 'خبرة موثقة',
+    contactLabel: 'تواصلي معي',
+    contactTitle: 'جاهزة لبناء<br>شيء رائع؟',
+    contactSub: 'أبحث بنشاط عن أول وظيفة في تصميم المنتجات أو حلول الذكاء الاصطناعي.',
+    dir: 'rtl',
+    projects: [
+      {
+        title: 'لسن',
+        desc: 'منصة ذكية لتدريب المصابين بالتأتأة على طلاقة التحدث باستخدام الواقع الافتراضي والذكاء الاصطناعي.',
+        role: 'تطوير الذكاء الاصطناعي · تكامل Azure Speech · تجربة المستخدم'
+      },
+      {
+        title: 'بيان',
+        desc: 'نظام طبي متكامل يوفر ترجمة مرئية متعددة اللغات بالذكاء الاصطناعي لتعزيز إمكانية الوصول للمرضى.',
+        role: 'تطوير متكامل · تكامل الذكاء الاصطناعي · تطوير الفكرة'
+      },
+      {
+        title: 'فاميت',
+        desc: 'منصة رقمية تربط المصانع والمطاعم والجمعيات الخيرية لإعادة توزيع الفائض الغذائي والحد من الهدر.',
+        role: 'تصميم UX · استراتيجية المنتج · تطوير الفكرة'
+      },
+      {
+        title: 'فيلمنق 🎬🎮',
+        desc: 'استوديو رقمي مبتكر يُحدث ثورة في تسويق الأفلام عبر استراتيجية Playvertising — ألعاب تفاعلية مستوحاة من السرد السينمائي.',
+        role: 'تصميم UI · استراتيجية UX · هندسة المحتوى التفاعلي'
+      }
+    ],
+    skills: [
+      { title: 'البرمجة', list: 'Python · Java · C++ · JavaScript' },
+      { title: 'تطوير الويب', list: 'HTML · CSS · React' },
+      { title: 'قواعد البيانات', list: 'MySQL · PostgreSQL' },
+      { title: 'الحوسبة السحابية', list: 'Microsoft Azure · Azure AI · OCI' },
+      { title: 'الأنظمة والبنية التحتية', list: 'الشبكات · الأنظمة الافتراضية · إدارة الوصول · تكوين الأنظمة' },
+      { title: 'تصميم UI/UX', list: 'Figma · النماذج الأولية · بحث المستخدم · أنظمة التصميم · إمكانية الوصول' },
+      { title: 'أدوات التطوير', list: 'Git · تكامل API · التوثيق التقني · تشخيص المشكلات' },
+      { title: 'المهارات الشخصية', list: 'التفكير التحليلي · حل المشكلات · الإبداع · القيادة · العمل الجماعي · التكيف · التعلم المستمر' }
+    ],
+    experience: [
+      {
+        date: 'أغسطس 2023 – أغسطس 2025',
+        title: 'عضو المسار التقني · نائب قائد المسار',
+        company: 'حاضنات ومسرّعات دور الريادة',
+        desc: 'قيادة المبادرات التقنية ودعم المنصات الرقمية وتنسيق الفرق متعددة التخصصات لتحقيق التحول الرقمي.'
+      },
+      {
+        date: 'يونيو 2024 – أغسطس 2024',
+        title: 'متدربة تعاونية — قسم تقنية المعلومات والاتصالات',
+        company: 'مستشفى الهدا العسكري',
+        desc: 'تصميم حل تقني لتقليل حالات الغياب عن المواعيد الطبية، وإدارة الأنظمة وقواعد البيانات والشبكات.'
+      },
+      {
+        date: 'تطوعي',
+        title: 'مستشارة · رئيسة تصميم جرافيك · كاتبة محتوى تقني',
+        company: 'نادي IEEE · نادي مطوري Google · فريق حسوبيات',
+        desc: 'تقديم التوجيه التقني وقيادة مبادرات التصميم الإبداعي وإنتاج محتوى تقني مبسّط.'
+      }
+    ],
+    awards: [
+      { emoji: '🥇', title: 'المركز الأول', desc: 'مشروع التخرج · جامعة الطائف · 2025' },
+      { emoji: '🥈', title: 'المركز الثاني', desc: 'هاكاثون Capsule · مؤتمر Pharmathon · 2026' },
+      { emoji: '🥈', title: 'المركز الثاني', desc: 'بوتكامب منشآت (فاميت) · 2024' },
+      { emoji: '🏅', title: 'أفضل 10 مشاريع', desc: 'فيلماثون · هيئة الأفلام السعودية · 2023' },
+      { emoji: '🥈', title: 'المركز الثاني', desc: 'بوتكامب التطبيقات الريادية (سنيورة) · 2022' },
+      { emoji: '🥉', title: 'المركز الثالث', desc: 'مسابقة البحث العلمي · محافظة الطائف · 2019' }
+    ],
+    certs: [
+      { name: 'تطوير حلول الذكاء الاصطناعي التوليدي بخدمة Azure OpenAI', issuer: 'مايكروسوفت', date: 'نوفمبر 2024' },
+      { name: 'تصميم وتنفيذ حلول الذكاء الاصطناعي على Azure', issuer: 'مايكروسوفت', date: 'أكتوبر 2024' },
+      { name: 'أساسيات الذكاء الاصطناعي على Azure', issuer: 'مايكروسوفت', date: 'أكتوبر 2024' }
+    ]
+  }
+};
+
+let currentLang = 'en';
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'ar' : 'en';
+  const t = translations[currentLang];
+  const btn = document.getElementById('lang-toggle');
+  const isAr = currentLang === 'ar';
+
+  // Direction
+  document.documentElement.dir = t.dir;
+  document.documentElement.lang = currentLang;
+  btn.textContent = isAr ? 'EN' : 'AR';
+
+  // Nav links
+  document.querySelectorAll('.nav-links a[data-en]').forEach(a => {
+    a.textContent = isAr ? a.dataset.ar : a.dataset.en;
+  });
+
+  // Hero
+  document.querySelector('.hero-tag').childNodes[1].textContent = ' ' + t.heroTag;
+  document.querySelector('.hero h1').innerHTML = t.heroTitle;
+  document.querySelector('.hero-sub').textContent = t.heroSub;
+  const heroBtns = document.querySelectorAll('.hero-actions a');
+  if(heroBtns[0]) heroBtns[0].textContent = t.heroCTA1;
+  if(heroBtns[1]) heroBtns[1].textContent = t.heroCTA2;
+
+  // Stats
+  const statLabels = document.querySelectorAll('.stat-label');
+  ['stat1','stat2','stat3','stat4'].forEach((k,i) => { if(statLabels[i]) statLabels[i].textContent = t[k]; });
+
+  // Section labels & titles
+  const labels = document.querySelectorAll('.section-label');
+  const titles = document.querySelectorAll('.section-title');
+  ['workLabel','skillsLabel','expLabel','awardsLabel','momentsLabel','certLabel','contactLabel'].forEach((k,i) => {
+    if(labels[i] && t[k]) labels[i].textContent = t[k];
+  });
+  ['workTitle','skillsTitle','expTitle','awardsTitle','certTitle','contactTitle'].forEach((k,i) => {
+    if(titles[i] && t[k]) titles[i].innerHTML = t[k];
+  });
+
+  // Projects
+  if(isAr && t.projects) {
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach((card, i) => {
+      if(!t.projects[i]) return;
+      const titleEl = card.querySelector('.project-title');
+      const descEl = card.querySelector('.project-desc');
+      const roleEl = card.querySelector('.project-role strong');
+      if(titleEl) titleEl.textContent = t.projects[i].title;
+      if(descEl) descEl.textContent = t.projects[i].desc;
+      if(roleEl) roleEl.textContent = t.projects[i].role;
+    });
+  } else {
+    const enProjects = [
+      { title: 'Lasen', desc: 'AI-based fluency training system using Azure Speech Services and VR technology — helping users improve their speaking confidence.', role: 'AI Development · Azure Speech Integration · UX' },
+      { title: 'Bayan', desc: 'Full-stack medical system featuring inclusive visual and multilingual AI translation — making healthcare accessible to all patients.', role: 'Full Stack Development · AI Integration · Idea Development' },
+      { title: 'FaMeet', desc: 'Smart platform connecting factories, restaurants, and charities for surplus food redistribution — reducing waste while supporting communities.', role: 'UX Design · Product Strategy · Idea Development' },
+      { title: 'Filming', desc: 'Digital analytics platform supporting the Saudi film industry — enabling data-driven feedback and content improvement for filmmakers and critics alike.', role: 'UX Design · UI Design · Analytics Strategy' }
+    ];
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach((card, i) => {
+      if(!enProjects[i]) return;
+      const titleEl = card.querySelector('.project-title');
+      const descEl = card.querySelector('.project-desc');
+      const roleEl = card.querySelector('.project-role strong');
+      if(titleEl) titleEl.textContent = enProjects[i].title;
+      if(descEl) descEl.textContent = enProjects[i].desc;
+      if(roleEl) roleEl.textContent = enProjects[i].role;
+    });
+  }
+
+  // Skills
+  if(isAr && t.skills) {
+    const skillCards = document.querySelectorAll('.skill-card:not([style])');
+    skillCards.forEach((card, i) => {
+      if(!t.skills[i]) return;
+      const h = card.querySelector('h3');
+      const l = card.querySelector('.skill-list');
+      if(h) h.textContent = t.skills[i].title;
+      if(l) l.textContent = t.skills[i].list;
+    });
+  } else {
+    const enSkills = [
+      { title: 'Programming', list: 'Python · Java · C++ · JavaScript' },
+      { title: 'Web Development', list: 'HTML · CSS · React' },
+      { title: 'Databases', list: 'MySQL · PostgreSQL' },
+      { title: 'Cloud Computing', list: 'Microsoft Azure · Azure AI · OCI' },
+      { title: 'Systems & Infrastructure', list: 'Virtualization · Networking · System Configuration · Access Control' },
+      { title: 'UI/UX Design', list: 'Figma · Wireframing · Prototyping · User Research · Design Systems · Accessibility' },
+      { title: 'Dev Tools', list: 'Git · API Integration · Technical Documentation · Problem Diagnosis' },
+      { title: 'Soft Skills', list: 'Analytical Thinking · Problem Solving · Creative Thinking · Leadership · Team Collaboration · Adaptability · Continuous Learning' }
+    ];
+    const skillCards = document.querySelectorAll('.skill-card:not([style])');
+    skillCards.forEach((card, i) => {
+      if(!enSkills[i]) return;
+      const h = card.querySelector('h3');
+      const l = card.querySelector('.skill-list');
+      if(h) h.textContent = enSkills[i].title;
+      if(l) l.textContent = enSkills[i].list;
+    });
+  }
+
+  // Awards
+  if(isAr && t.awards) {
+    const awardCards = document.querySelectorAll('.skill-card[style]');
+    awardCards.forEach((card, i) => {
+      if(!t.awards[i]) return;
+      const h = card.querySelector('h3');
+      const p = card.querySelector('p');
+      if(h) h.textContent = t.awards[i].title;
+      if(p) p.textContent = t.awards[i].desc;
+    });
+  } else {
+    const enAwards = [
+      { title: '1st Place', desc: 'Graduation Project · Taif University · 2025' },
+      { title: '2nd Place', desc: 'Capsule Hackathon · Pharmathon Conference · 2026' },
+      { title: '2nd Place', desc: "Monsha'at Bootcamp (FaMeet) · 2024" },
+      { title: 'Top 10 Projects', desc: 'Filmathon · Saudi Film Commission · 2023' },
+      { title: '2nd Place', desc: 'Entrepreneurial Applications Bootcamp (Seniora) · 2022' },
+      { title: '3rd Place', desc: 'Scientific Research Competition · Taif Governorate · 2019' }
+    ];
+    const awardCards = document.querySelectorAll('.skill-card[style]');
+    awardCards.forEach((card, i) => {
+      if(!enAwards[i]) return;
+      const h = card.querySelector('h3');
+      const p = card.querySelector('p');
+      if(h) h.textContent = enAwards[i].title;
+      if(p) p.textContent = enAwards[i].desc;
+    });
+  }
+
+  // Experience
+  if(isAr && t.experience) {
+    const expItems = document.querySelectorAll('.exp-item');
+    expItems.forEach((item, i) => {
+      if(!t.experience[i]) return;
+      const date = item.querySelector('.exp-date');
+      const title = item.querySelector('.exp-title');
+      const company = item.querySelector('.exp-company');
+      const desc = item.querySelector('.exp-desc');
+      if(date) date.textContent = t.experience[i].date;
+      if(title) title.innerHTML = t.experience[i].title;
+      if(company) company.textContent = t.experience[i].company;
+      if(desc) desc.textContent = t.experience[i].desc;
+    });
+  } else {
+    const expItems = document.querySelectorAll('.exp-item');
+    const enExp = [
+      { date: 'Aug 2023 – Dec 2025', title: 'Tech Track Member <span style="font-size:0.75rem;color:var(--accent2);font-weight:400;">· Deputy Track Lead</span>', company: 'Dour AlRyadah Incubators & Accelerators', desc: 'Led technology-driven initiatives, coordinated cross-functional teams, supported digital transformation and content strategy.' },
+      { date: 'Jun 2024 – Aug 2024', title: 'Cooperative Trainee — IT & Communications', company: 'Al Hada Armed Forces Hospital', desc: 'Designed IT solution to reduce no-shows. Managed systems, databases, networking, and troubleshooting.' },
+      { date: 'Volunteer', title: 'Advisor · Head of Design · Technical Writer', company: 'IEEE Club · Google DSC · Hasoobiyat Team', desc: 'Technical guidance, creative design leadership, and simplified content creation.' }
+    ];
+    expItems.forEach((item, i) => {
+      if(!enExp[i]) return;
+      const date = item.querySelector('.exp-date');
+      const title = item.querySelector('.exp-title');
+      const company = item.querySelector('.exp-company');
+      const desc = item.querySelector('.exp-desc');
+      if(date) date.textContent = enExp[i].date;
+      if(title) title.innerHTML = enExp[i].title;
+      if(company) company.textContent = enExp[i].company;
+      if(desc) desc.textContent = enExp[i].desc;
+    });
+  }
+
+  // Certifications
+  if(isAr && t.certs) {
+    const certItems = document.querySelectorAll('.cert-item');
+    certItems.forEach((item, i) => {
+      if(!t.certs[i]) return;
+      const name = item.querySelector('.cert-name');
+      const issuer = item.querySelector('.cert-issuer');
+      const date = item.querySelector('.cert-date');
+      if(name) name.textContent = t.certs[i].name;
+      if(issuer) issuer.textContent = t.certs[i].issuer;
+      if(date) date.textContent = t.certs[i].date;
+    });
+  } else {
+    const enCerts = [
+      { name: 'Developing Generative AI Solutions with Azure OpenAI Service', issuer: 'Microsoft', date: 'Nov 2024' },
+      { name: 'Designing and Implementing Microsoft Azure AI Solutions', issuer: 'Microsoft', date: 'Oct 2024' },
+      { name: 'Microsoft Azure AI Fundamentals', issuer: 'Microsoft', date: 'Oct 2024' }
+    ];
+    const certItems = document.querySelectorAll('.cert-item');
+    certItems.forEach((item, i) => {
+      if(!enCerts[i]) return;
+      const name = item.querySelector('.cert-name');
+      const issuer = item.querySelector('.cert-issuer');
+      const date = item.querySelector('.cert-date');
+      if(name) name.textContent = enCerts[i].name;
+      if(issuer) issuer.textContent = enCerts[i].issuer;
+      if(date) date.textContent = enCerts[i].date;
+    });
+  }
+
+  // Contact
+  const contactSub = document.querySelector('.contact-section p');
+  if(contactSub) contactSub.textContent = t.contactSub;
+}
+</script>
+
+</body>
+</html>
